@@ -21,7 +21,10 @@ def wordleResponse(guess,real):
             reallist.remove(guess[i])
             response[i]=YELLOW
     return response
-wordset=["tubes","fling","champ","wordy"]
+wordset=[]
+for i in range(0,4):
+    wordset.append(input("word: ").strip())
+
 with open("wordle-answers-alphabetical.txt") as file:
     allwords=[i.strip() for i in file.readlines()]
 testwords=allwords
