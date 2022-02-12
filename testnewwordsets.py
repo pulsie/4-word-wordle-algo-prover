@@ -46,3 +46,5 @@ for testWord in testwords:
         
 end=time.time()
 print(end-start)
+print(ambigWordSet)
+print(len(ambigWordSet))
