@@ -25,22 +25,28 @@ wordset=["tubes","fling","champ","wordy"]
 with open("wordle-answers-alphabetical.txt") as file:
     allwords=[i.strip() for i in file.readlines()]
 
-testwords=allwords
-
+#testwords=allwords
+testwords=['savvy', 'steer', 'ester', 'reset',
+           'viper', 'sassy', 'vague', 'gauze',
+           'piper', 'gauge', 'riper', 'stake',
+           'state', 'stave', 'assay', 'skate']
+wordgroupdicts=dict()
 for testWord in testwords:
     responses=[]
     for answerWord in wordset:
         responses.append(wordleResponse(answerWord,testWord))
-    for possibleword in allwords:
+    for possibleword in testwords:
         tempResponses=[]
         for answerWord in wordset:
             tempResponses.append(wordleResponse(answerWord,possibleword))
         if(tempResponses==responses and testWord!=possibleword):
             print(testWord+" has ambiguity w "+possibleword)
-            ambiguityCounter[testWord]+=1
-            if(ambiguityCounter[testWord]==2):
-                ambigWordSet.add(testWord)
-           
-        
+            if(str(tempResponses) in wordgroupdicts.keys()):
+                wordgroupdicts[str(tempResponses)].add(testWord)
+                wordgroupdicts[str(tempResponses)].add(possibleword)
+            else:
+                wordgroupdicts[str(tempResponses)]=set()
+                wordgroupdicts[str(tempResponses)].add(testWord)
+                wordgroupdicts[str(tempResponses)].add(possibleword)
 end=time.time()
 print(end-start)
